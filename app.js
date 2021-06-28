@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const connectDB = require('./db/connect')
 require('dotenv').config()
-const tasks = require('./routers/task')
+const users = require('./routers/user')
 
 const port = 5000;
 
@@ -10,7 +10,7 @@ app.use(express.static('./public'))
 
 app.use(express.json())
 
-app.use('/api/v1/tasks', tasks)
+app.use('/api/v1/users', users)
 
 const start = async () => {
     try {
