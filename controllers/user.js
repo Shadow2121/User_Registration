@@ -25,7 +25,7 @@ const getUser = async (req, res) => {
         const { id:taskID } = req.params
         const task = await Task.findOne({ _id:taskID})
         if (!task){
-            return res.status(404).json({ msg : 'Data is not available for this id'})
+            return res.status(404).json({ msg : `Data is not available for the id : ${taskID}`})
         }
         res.status(200).json({ task })
     } catch (error) {
@@ -38,7 +38,7 @@ const upgradeUser = async (req, res) => {
         const { id:taskID } = req.params
         const task = await Task.findOneAndUpdate({_id:taskID}, req.body, { runValidators:true, new:true})
         if (!task){
-            return res.status(404).json({ msg : 'Data is not available for this id'})
+            return res.status(404).json({ msg : `Data is not available for the id : ${taskID}`})
         }
         res.status(200).json({ task })
     } catch (error) {
@@ -51,7 +51,7 @@ const deleteUser = async (req, res) => {
         const { id:taskID } = req.params
         const task = await Task.findOneAndDelete({ _id:taskID })        
         if (!task){
-            return res.status(404).json({ msg : 'Data is not available for this id'})
+            return res.status(404).json({ msg : `Data is not available for the id : ${taskID}`})
         }
         res.status(200).send({ deleted : task})
     } catch (error) {

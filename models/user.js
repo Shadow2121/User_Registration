@@ -4,27 +4,26 @@ const UserSchema = new mongoose.Schema({
     firstName:{
         type:String,
         required:[true, "must enter the name"],
-        maxlength:[20, "name must be in range (<20)"],
+        maxlength:[10, "name must be in range (<10)"],
         trim:true
     },
     lastName:{
         type:String,
         required:[true, "must enter the name"],
-        maxlength:[20, "name must be in range (<20)"],
+        maxlength:[10, "name must be in range (<10)"],
         trim:true
     },
     password:{
         type:String,
         required:[true, "must enter the name"],
-        minlength:[8, "name must be in range (<20)"],
+        minlength:[8, "password must be >8"],
     },
     address:{
         type:String,
-        required:[true, "must enter the name"],
     },
     age:{
         type:Number,
-        required:[true, "needed"],
+        required:[true, "must enter the age"],
         min:18,
         max:100,
         unique:false,
