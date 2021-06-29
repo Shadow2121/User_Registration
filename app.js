@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const connectDB = require('./db/connect')
+const connectDB = require('./db/connect');
+const notFound = require('./middleware/not-found');
 require('dotenv').config()
 const users = require('./routers/user')
 
@@ -11,6 +12,8 @@ app.use(express.static('./public'))
 app.use(express.json())
 
 app.use('/api/v1/users', users)
+
+app.use(notFound)
 
 const start = async () => {
     try {
