@@ -1,10 +1,10 @@
 const { get } = require('mongoose')
-const Task = require('../models/user')
+const User = require('../models/user')
 
 const getAllUsers = async (req, res) => {
     try {
-        const tasks = await Task.find({})
-        res.status(200).json({ tasks })
+        const users = await User.find({})
+        res.status(200).json({ success:true, users })
     } catch (error) {
         res.status(500).json(error)
     }
@@ -12,8 +12,8 @@ const getAllUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
-        const task = await Task.create(req.body)
-        res.status(201).json({task})
+        const user = await User.create(req.body)
+        res.status(201).json({ success:true, user })
     } catch (error) {
         console.log(req.body);
         res.status(500).json({error})
@@ -22,12 +22,12 @@ const createUser = async (req, res) => {
 
 const getUser = async (req, res) => {
     try {
-        const { id:taskID } = req.params
-        const task = await Task.findOne({ _id:taskID})
-        if (!task){
-            return res.status(404).json({ msg : `Data is not available for the id : ${taskID}`})
+        const { id:userID } = req.params
+        const user = await User.findOne({ _id:userID})
+        if (!user){
+            return res.status(404).json({ msg : `Data is not available for the id : ${userID}`})
         }
-        res.status(200).json({ task })
+        res.status(200).json({ success:true, user })
     } catch (error) {
         res.status(500).json(error)
     }
@@ -35,12 +35,12 @@ const getUser = async (req, res) => {
 
 const upgradeUser = async (req, res) => {
     try {
-        const { id:taskID } = req.params
-        const task = await Task.findOneAndUpdate({_id:taskID}, req.body, { runValidators:true, new:true})
-        if (!task){
-            return res.status(404).json({ msg : `Data is not available for the id : ${taskID}`})
+        const { id:userID } = req.params
+        const user = await User.findOneAndUpdate({_id:userID}, req.body, { runValidators:true, new:true})
+        if (!user){
+            return res.status(404).json({ msg : `Data is not available for the id : ${userID}`})
         }
-        res.status(200).json({ task })
+        res.status(200).json({ success:true, user })
     } catch (error) {
         res.status(500).json(error)
     }
@@ -48,12 +48,12 @@ const upgradeUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     try {
-        const { id:taskID } = req.params
-        const task = await Task.findOneAndDelete({ _id:taskID })        
-        if (!task){
-            return res.status(404).json({ msg : `Data is not available for the id : ${taskID}`})
+        const { id:userID } = req.params
+        const user = await User.findOneAndDelete({ _id:userID })        
+        if (!user){
+            return res.status(404).json({ msg : `Data is not available for the id : ${userID}`})
         }
-        res.status(200).send({ deleted : task})
+        res.status(200).send({ success: true, deleted : user })
     } catch (error) {
         res.status(500).json(error)
     }
